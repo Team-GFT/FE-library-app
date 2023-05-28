@@ -6,5 +6,7 @@ export const globalStyles = css`
 
   html, body, div#root {
     height: 100%;
+    width: 100%;
+    display: flex;
   }
 `;

@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { PropsWithChildren } from "react";
 import Header from "../components/Layout/Header";
 import Sidebar from "../components/Layout/Sidebar";
 import { css } from "@emotion/react";
@@ -8,9 +7,9 @@ import { Outlet } from "react-router-dom";
 function Layout() {
   return (
     <>
-      <Header />
+      <Sidebar />
       <div css={contentWrapperCss}>
-        <Sidebar />
+        <Header />
         <main css={mainCss}>
           <Outlet />
         </main>
@@ -21,12 +20,12 @@ function Layout() {
 
 const contentWrapperCss = css`
   display: flex;
-  height: 100%;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const mainCss = css`
-  display: flex;
-  flex: 5;
+  padding: 40px;
 `;
 
 export default Layout;
