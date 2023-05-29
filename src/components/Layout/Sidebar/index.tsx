@@ -2,18 +2,16 @@
 import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { ReactComponent as More } from "/src/assets/More.svg";
-import { ReactComponent as BookList } from "/src/assets/BookList.svg";
-import { ReactComponent as Member } from "/src/assets/Member.svg";
-import { ReactComponent as History } from "/src/assets/History.svg";
+import { ReactComponent as Logo } from "/src/assets/Logo.svg";
+import { theme } from "../../../styles/theme";
 
-function Sidebar() {
-  const Menus = [
-    { name: "도서 목록", path: "/", icon: <BookList /> },
-    { name: "회원 관리", path: "/members", icon: <Member /> },
-    { name: "대출 이력", path: "/history", icon: <History /> },
-  ];
+interface SidebarProps {
+  pages: { name: string; path: string; icon: ReactNode }[];
+}
+
+function Sidebar({ pages }: SidebarProps) {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const handleSidebar = () => {
     setIsOpenSidebar((prev) => !prev);
@@ -28,9 +26,10 @@ function Sidebar() {
     >
       {isOpenSidebar ? (
         <>
-          {Menus.map((menu, index) => (
-            <Link to={menu.path} key={index}>
-              <SidebarItem menu={menu} />
+          <Logo />
+          {pages.map((page, index) => (
+            <Link to={page.path} key={index}>
+              <SidebarItem menu={page} />
             </Link>
           ))}
         </>
@@ -38,7 +37,7 @@ function Sidebar() {
         <>
           <More />
           <div>
-            {Menus.map((menu) => (
+            {pages.map((menu) => (
               <>{menu.icon}</>
             ))}
           </div>
@@ -51,14 +50,14 @@ function Sidebar() {
 const sidebarCss = css`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 30px;
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+  background: ${theme.background};
   transition: all 0.2s;
 
   &.open_sidebar {
     width: 13rem;
-    padding: 85px 50px;
+    padding: 8px 50px;
     gap: 2rem;
   }
 
@@ -68,7 +67,7 @@ const sidebarCss = css`
     div {
       display: flex;
       flex-direction: column;
-      margin-top: 30px;
+      margin-top: 50px;
       gap: 20px;
     }
   }
