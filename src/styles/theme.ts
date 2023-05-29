@@ -4,4 +4,6 @@ export const theme: { [key in palette]: string } = {
   keyColor: "#5A9367",
   keyLight: "#5CAB7D",
   keyDark: "#44633F",
+  background: "#FFFFF2",
+  white: "#fff",
 };
